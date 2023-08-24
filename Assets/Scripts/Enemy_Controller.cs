@@ -37,7 +37,7 @@ public class Enemy_Controller : MonoBehaviour
             transform.rotation = Quaternion.Lerp(startRotation, endRotation, t);
             yield return null;
         }
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(duration);
     }
 
     IEnumerator EnemyRotateControl()

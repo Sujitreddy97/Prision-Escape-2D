@@ -8,7 +8,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator anim;
     private float lastX, lastY;
-    Vector2 move;
+
 
 
     private void Update()
@@ -16,24 +16,32 @@ public class Player_Movement : MonoBehaviour
         PlayerInput();
     }
 
-    private void FixedUpdate()
-    {
-        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
-    }
+    /* private void FixedUpdate()
+     {
+         rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
+     }*/
 
     private void PlayerInput()
     {
-        move.x = Input.GetAxisRaw("Horizontal");
-        move.y = Input.GetAxisRaw("Vertical");
-        if (move.x != 0)
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        if (horizontal != 0)
         {
-            move.y = 0;
+            vertical = 0;
         }
-        else if (move.y != 0)
+        else if (vertical != 0)
         {
-            move.x = 0;
+            horizontal = 0;
         }
-        PlayerAnimation(move.x, move.y);
+        PlayerAnimation(horizontal, vertical);
+        PlayerMovement(horizontal, vertical);
+    }
+    private void PlayerMovement(float horizontal, float vertical)
+    {
+        Vector3 position = transform.position;
+        position.x += horizontal * speed * Time.deltaTime;
+        position.y += vertical * speed * Time.deltaTime;
+        transform.position = position;
     }
 
     private void PlayerAnimation(float horizontal, float vertical)
