@@ -1,25 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Player_Movement : MonoBehaviour
+public class Player_Controller : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator anim;
     private float lastX, lastY;
+    private int lives = 3;
+    private Vector3 RespawnPoint;
 
-
-
+    private void Start()
+    {
+        setRespawnPoint(transform.position);
+    }
     private void Update()
     {
         PlayerInput();
     }
-
-    /* private void FixedUpdate()
-     {
-         rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
-     }*/
 
     private void PlayerInput()
     {
@@ -72,6 +70,27 @@ public class Player_Movement : MonoBehaviour
         anim.SetFloat("DirX", horizontal);
         anim.SetFloat("DirY", vertical);
 
+    }
+
+    public void DecreaseLife(int life)
+    {
+        if (lives > 0)
+        {
+            transform.position = RespawnPoint;
+            lives -= life;
+            Debug.Log("Lives" + lives);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.Log("Busted");
+        }
+            
+    }
+
+    public void setRespawnPoint(Vector3 position)
+    {
+        RespawnPoint = position;
     }
 
 }

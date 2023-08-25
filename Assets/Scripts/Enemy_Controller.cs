@@ -8,10 +8,13 @@ public class Enemy_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Player_Movement playerController = collision.gameObject.GetComponent<Player_Movement>();
+        Player_Controller playerController = collision.gameObject.GetComponent<Player_Controller>();
         if (playerController != null)
         {
-            Debug.Log("Player Died");
+            //Debug.Log("Player Died");
+            //Decrease Life
+            //Respwan
+            playerController.DecreaseLife(1);
         }
     }
 
@@ -19,11 +22,6 @@ public class Enemy_Controller : MonoBehaviour
     {
         StartCoroutine("EnemyRotateControl");
     }
-
-    /*void TurnAround()
-    {
-        transform.Rotate(0, 0, rotationAngle);
-    }*/
 
     IEnumerator TurnAround()
     {

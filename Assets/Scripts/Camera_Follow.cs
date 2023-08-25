@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Camera_Follow : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    [SerializeField] private Transform player;
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        Vector3 cameraPos = transform.position;
 
-        cameraPos.x = player.transform.position.x;
-        cameraPos.y = player.transform.position.y;
-        cameraPos.z = transform.position.z;
+        Vector3 cameraPos = new Vector3(player.position.x, player.position.y + 2, player.position.z - 10);
         transform.position = cameraPos;
     }
 
