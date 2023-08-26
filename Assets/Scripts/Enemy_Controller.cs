@@ -1,26 +1,62 @@
 using System.Collections;
 using UnityEngine;
 
+public enum EnemyType
+{
+    Type1,
+    Type2,
+    Type3
+}
+
 public class Enemy_Controller : MonoBehaviour
 {
     [SerializeField] private float duration;
     [SerializeField] private float rotationAngle = 90f;
+    [SerializeField] private EnemyType enemyType;
+    [SerializeField] private float speed;
+    private bool isMovingRight;
+    private bool isMovingUp;
+    private void Start()
+    {
+        if (enemyType == EnemyType.Type1)
+        {
+            StartCoroutine("EnemyRotateControl");
+        }
+    }
+    void Update()
+    {
+        if (enemyType == EnemyType.Type2 || enemyType == EnemyType.Type3)
+            Patrol(enemyType);
+    }
 
+    void Patrol(EnemyType type)
+    {
+        switch (type)
+        {
+            case EnemyType.Type2:
+                transform.Translate(Vector2.right * (isMovingRight ? 1 : -1) * speed * Time.deltaTime);
+                break;
+
+            case EnemyType.Type3:
+                transform.Translate(Vector2.up * (isMovingUp ? 1 : -1) * speed * Time.deltaTime);
+                break;
+        }
+
+
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Player_Controller playerController = collision.gameObject.GetComponent<Player_Controller>();
         if (playerController != null)
         {
-            //Debug.Log("Player Died");
-            //Decrease Life
-            //Respwan
             playerController.DecreaseLife(1);
         }
-    }
 
-    private void Start()
-    {
-        StartCoroutine("EnemyRotateControl");
+        if (collision.gameObject.tag == "Wall")
+        {
+            isMovingRight = !isMovingRight;
+            isMovingUp = !isMovingUp;
+        }
     }
 
     IEnumerator TurnAround()
@@ -45,4 +81,5 @@ public class Enemy_Controller : MonoBehaviour
             yield return StartCoroutine(TurnAround());
         }
     }
+
 }

@@ -152,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.5
   rotationAngle: 90
+  enemyType: 0
+  speed: 0
 --- !u!1 &7011835445165425917
 GameObject:
   m_ObjectHideFlags: 0
