@@ -6,6 +6,7 @@ public class Lobby_Manager : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene(1);
+        Audio_Manager.Instance.PlaySFX(AudioName.ButtonClick);
     }
 
     public void QuitGame()
@@ -15,5 +16,6 @@ public class Lobby_Manager : MonoBehaviour
 #else
         Application.Quit();
 #endif
+        Audio_Manager.Instance.PlaySFX(AudioName.ButtonClick);
     }
 }

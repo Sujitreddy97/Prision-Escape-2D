@@ -9,6 +9,7 @@ public class Player_Controller : MonoBehaviour
     [SerializeField] private Pause_Game_Controller pauseMenu;
     [SerializeField] private GameObject GameOver;
     [SerializeField] private TMP_Text livesText;
+    [SerializeField] private GameObject LevelComplete;
 
     private float lastX, lastY;
     private int lives = 3;
@@ -18,6 +19,7 @@ public class Player_Controller : MonoBehaviour
     private void Awake()
     {
         GameOver.SetActive(false);
+        LevelComplete.SetActive(false);
     }
 
     private void Start()
@@ -107,16 +109,21 @@ public class Player_Controller : MonoBehaviour
         lives--;
         if (lives <= 0)
         {
+            lives = 0;
             //Debug.Log("Busted");
             GameOver.SetActive(true);
+            Audio_Manager.Instance.PlaySFX(AudioName.GameOver);
             this.enabled = false;
+            Audio_Manager.Instance.StopAllSoundsExceptBG();
         }
         else
         {
             transform.position = RespawnPoint;
         }
-        //Debug.Log("Lives" + lives);
         UpdateLivesText();
+        //Debug.Log("Lives" + lives);
+        Audio_Manager.Instance.PlaySFX(AudioName.Caught);
+        
 
     }
     private void UpdateLivesText()
@@ -128,5 +135,9 @@ public class Player_Controller : MonoBehaviour
         RespawnPoint = position;
     }
 
+    public void setLevelComplete()
+    {
+        LevelComplete.SetActive(true);
+    }
     
 }

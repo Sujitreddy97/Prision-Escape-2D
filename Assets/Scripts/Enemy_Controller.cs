@@ -22,6 +22,8 @@ public class Enemy_Controller : MonoBehaviour
         {
             StartCoroutine("EnemyRotateControl");
         }
+
+        Audio_Manager.Instance.PlayerLaserSound(AudioName.LaserBeam);
     }
     void Update()
     {
