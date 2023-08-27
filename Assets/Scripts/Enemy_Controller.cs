@@ -49,7 +49,7 @@ public class Enemy_Controller : MonoBehaviour
         Player_Controller playerController = collision.gameObject.GetComponent<Player_Controller>();
         if (playerController != null)
         {
-            playerController.DecreaseLife(1);
+            playerController.DecreaseLife();
         }
 
         if (collision.gameObject.tag == "Wall")

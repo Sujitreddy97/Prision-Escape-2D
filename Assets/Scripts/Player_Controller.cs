@@ -1,18 +1,29 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Player_Controller : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator anim;
+    [SerializeField] private Pause_Game_Controller pauseMenu;
+    [SerializeField] private GameObject GameOver;
+    [SerializeField] private TMP_Text livesText;
+
     private float lastX, lastY;
     private int lives = 3;
     private Vector3 RespawnPoint;
+    private bool isPaused;
+    
+    private void Awake()
+    {
+        GameOver.SetActive(false);
+    }
 
     private void Start()
     {
         setRespawnPoint(transform.position);
+        UpdateLivesText();
     }
     private void Update()
     {
@@ -33,7 +44,26 @@ public class Player_Controller : MonoBehaviour
         }
         PlayerAnimation(horizontal, vertical);
         PlayerMovement(horizontal, vertical);
+        PauseMenuUI();
     }
+
+    private void PauseMenuUI()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            isPaused = !isPaused;
+            if (isPaused)
+            {
+                pauseMenu.PauseGame();
+            }
+            else
+            {
+                pauseMenu.ResumeGame();
+            }
+        }
+
+    }
+
     private void PlayerMovement(float horizontal, float vertical)
     {
         Vector3 position = transform.position;
@@ -72,25 +102,31 @@ public class Player_Controller : MonoBehaviour
 
     }
 
-    public void DecreaseLife(int life)
+    public void DecreaseLife()
     {
-        if (lives > 0)
+        lives--;
+        if (lives <= 0)
         {
-            transform.position = RespawnPoint;
-            lives -= life;
-            Debug.Log("Lives" + lives);
+            //Debug.Log("Busted");
+            GameOver.SetActive(true);
+            this.enabled = false;
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            Debug.Log("Busted");
+            transform.position = RespawnPoint;
         }
-            
-    }
+        //Debug.Log("Lives" + lives);
+        UpdateLivesText();
 
+    }
+    private void UpdateLivesText()
+    {
+        livesText.text = "LIVES: " + lives;
+    }
     public void setRespawnPoint(Vector3 position)
     {
         RespawnPoint = position;
     }
 
+    
 }
