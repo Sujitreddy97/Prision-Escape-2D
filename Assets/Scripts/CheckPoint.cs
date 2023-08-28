@@ -10,6 +10,7 @@ public class CheckPoint : MonoBehaviour
         if(player_Controller!=null)
         {
             player_Controller.setRespawnPoint(transform.position);
+            Audio_Manager.Instance.PlaySFX(AudioName.CheckPoint);
         }
     }
 }
