@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 1
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 05f3bbe50995cca1
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -129,11 +129,11 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.8045566, y: 1.7243934}
+  - {x: -1.3972428, y: 3.0175266}
   - {x: -0.00014913362, y: -0.00056421733}
-  - {x: 0.80779195, y: 1.7342072}
-  - {x: 0.015157104, y: 1.9251981}
-  - {x: -0.7987901, y: 1.7468106}
+  - {x: 1.418438, y: 3.081221}
+  - {x: -0.03872347, y: 3.3984818}
+  - {x: -1.4094362, y: 3.0219836}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -150,8 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6dce7627e0692f4bbbf3364fde4b7bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 2
+  duration: 0.5
   rotationAngle: 90
+  enemyType: 0
+  speed: 0
 --- !u!1 &7011835445165425917
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,8 +181,8 @@ Transform:
   m_GameObject: {fileID: 7011835445165425917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.3161235, y: 2.89, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7011835444803584796}
   m_Father: {fileID: 0}
@@ -224,9 +226,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1073040553
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
